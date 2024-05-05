@@ -4,23 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : PlayerMgr
 {
-    public Transform cam;
-    public float Speed = 6f;
-    private CharacterController controller;
-    private Animator animator;
-    public bool inputAllowed = true;
-    
-    public float Gravity = -9.8f;
-    public Vector3 Velocity = Vector3.zero;
-    public Transform GroundCheck;
-    public float CheckRadious = 0.2f;
-    private bool IsGround;
-    public LayerMask layerMask;
-
-    private float turnSmoothTime = 0.1f;
-    private float turnSmoothVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         }
         
     }
-    private void mymove()
+    public void mymove()
     {
         IsGround = Physics.CheckSphere(GroundCheck.position, CheckRadious, layerMask);
         if (IsGround && Velocity.y < 0)
@@ -68,7 +53,7 @@ public class PlayerMove : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-                controller.Move(moveDir.normalized * Speed * Time.deltaTime);
+                controller.Move(moveDir.normalized * walkSpeed * Time.deltaTime);
                 animator.SetBool("Walk", true);
             }
         }

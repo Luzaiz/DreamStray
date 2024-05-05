@@ -39179,7 +39179,7 @@ CharacterController:
   m_Radius: 0.97
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.99, z: 0}
 --- !u!114 &1406040451
@@ -39194,16 +39194,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e6806121e49844eaa077e0ed816a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 0
+  runSpeed: 0
+  controller: {fileID: 0}
+  animator: {fileID: 0}
   cam: {fileID: 1612087168}
-  Speed: 2
   inputAllowed: 1
   Gravity: -9.8
   Velocity: {x: 0, y: 0, z: 0}
   GroundCheck: {fileID: 312289491}
   CheckRadious: 0.2
+  IsGround: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  turnSmoothTime: 0.1
+  turnSmoothVelocity: 0
 --- !u!195 &1406040452
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -43607,7 +43613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1534767910}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22541484, y: 0.00076908467, z: -0.00017794287, w: 0.9742626}
+  m_LocalRotation: {x: 0.22541484, y: 0.00076912215, z: -0.00017795154, w: 0.9742626}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
