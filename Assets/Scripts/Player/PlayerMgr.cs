@@ -6,17 +6,18 @@ public class PlayerMgr : MonoBehaviour
 {
     public float walkSpeed; // 走路速度
     public float runSpeed; // 跑步速度
+    public float jumpHeight = 2f;
     [HideInInspector]public CharacterController controller; // 
     [HideInInspector]public Animator animator; // 动画 
     public Transform cam;
     public bool inputAllowed = true;
     
     //重力相关  
-    public float Gravity = -9.8f;
-    public Vector3 Velocity = Vector3.zero;
-    public Transform GroundCheck;
-    public float CheckRadious = 0.2f;
-    public bool IsGround;
+    public float gravity = -40f;
+    public Vector3 velocity = Vector3.zero;
+    public Transform groundCheck;
+    public float checkRadious = 0.2f;
+    public bool isGround;
     public LayerMask layerMask;
     
     public float turnSmoothTime = 0.1f;
@@ -27,7 +28,9 @@ public class PlayerMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = transform.GetComponent<Animator>();
+        controller = transform.GetComponent<CharacterController>();
+        groundCheck = transform.Find("GroundCheck").transform;
     }
 
     // Update is called once per frame
@@ -37,17 +40,17 @@ public class PlayerMgr : MonoBehaviour
     }
     public void mymove()
     {
-        IsGround = Physics.CheckSphere(GroundCheck.position, CheckRadious, layerMask);
-        if (IsGround && Velocity.y < 0)
+        isGround = Physics.CheckSphere(groundCheck.position, checkRadious, layerMask);
+        if (isGround && velocity.y < 0)
         {
-            Velocity.y = 0;
+            velocity.y = 0;
         }
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         
+        //if (horizontal >= 0.5f || vertical >= 0.5f)
         if (horizontal != 0 || vertical != 0 )
-            //if (horizontal >= 0.5f || vertical >= 0.5f)
         {
             if (direction.magnitude>=0.3f)
             {
@@ -65,18 +68,23 @@ public class PlayerMgr : MonoBehaviour
         {
             animator.SetBool("Walk", false);
         }
-        Velocity.y += Gravity * Time.deltaTime;
-        controller.Move(Velocity * Time.deltaTime);//重力
+        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        {
+            animator.SetTrigger("Jump");
+            velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        }
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);//重力
     }
 
     public void myGravity()
     {
-        IsGround = Physics.CheckSphere(GroundCheck.position, CheckRadious, layerMask);
-        if (IsGround && Velocity.y < 0)
+        isGround = Physics.CheckSphere(groundCheck.position, checkRadious, layerMask);
+        if (isGround && velocity.y < 0)
         {
-            Velocity.y = 0;
+            velocity.y = 0;
         }
-        Velocity.y += Gravity * Time.deltaTime;
-        controller.Move(Velocity * Time.deltaTime);//重力
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);//重力
     }
 }

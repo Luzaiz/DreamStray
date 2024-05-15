@@ -2,15 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class PlayerMove : PlayerMgr
+public class PlayerThree : PlayerMgr
 {
+    [SerializeField]private MovingPoint movingGround;
     // Start is called before the first frame update
     void Start()
     {
-        controller = transform.GetComponent<CharacterController>();
         animator = transform.GetComponent<Animator>();
+        controller = transform.GetComponent<CharacterController>();
         groundCheck = transform.Find("GroundCheck").transform;
     }
 
@@ -21,5 +21,14 @@ public class PlayerMove : PlayerMgr
         {
             mymove();
         }
+        if (movingGround != null)  
+        {  
+            movingGround.UpdatePlayerPosition(controller, transform);  
+        }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        movingGround = hit.transform.GetComponent<MovingPoint>();
     }
 }
