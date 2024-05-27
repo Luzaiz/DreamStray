@@ -9,9 +9,7 @@ public class PlayerThree : PlayerMgr
     // Start is called before the first frame update
     void Start()
     {
-        animator = transform.GetComponent<Animator>();
-        controller = transform.GetComponent<CharacterController>();
-        groundCheck = transform.Find("GroundCheck").transform;
+        
     }
 
     // Update is called once per frame
@@ -19,7 +17,7 @@ public class PlayerThree : PlayerMgr
     {
         if (inputAllowed)
         {
-            mymove();
+            mymove(true,true,true);
         }
         if (movingGround != null)  
         {  

@@ -55,11 +55,11 @@ public class SaipaoTrigger : NpcMgr
     
     IEnumerator WaitAndDoSomething()  
     {
-        yield return new WaitForSeconds(1.8f); // 等待两秒
+        yield return new WaitForSeconds(2f); // 等待两秒
         // 两秒后执行的代码  
         BeginRun();
         maskUI.GetComponent<FadeInOut>().StartFadeIn();
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(2f);
         countdownText.gameObject.SetActive(true);
         StartCoroutine(Countdown());
     }  
@@ -106,7 +106,7 @@ public class SaipaoTrigger : NpcMgr
     {
         if (!isSaiPao && other.tag=="Player")
         {
-            player = other.gameObject;
+            player = other.gameObject.GetComponent<PlayerMgr>();
             tipsCanvas.SetActive(true);
             isNearNPC = true;
         }

@@ -2,10 +2,10 @@ using System.Collections;
 using UnityEngine;  
 using UnityEngine.UI;
   
-public class FadeInOut : MonoBehaviour  
+public class FadeInOut : BasePanel  
 {  
     public Image fadeImage; // 在Inspector中分配这个Image组件  
-    public float fadeDuration = 1.0f; // 淡入淡出持续时间  
+    public float fadeDurationTime = 1.0f; // 淡入淡出持续时间  
   
     private bool isFadingOut = false; // 是否正在淡出  
   
@@ -29,14 +29,12 @@ public class FadeInOut : MonoBehaviour
   
         while (lerpT < 1f)  
         {  
-            lerpT += Time.deltaTime / fadeDuration;  
-            fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf .Lerp(startAlpha, targetAlpha, lerpT));  
+            lerpT += Time.deltaTime / fadeDurationTime;  
+            fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(startAlpha, targetAlpha, lerpT));  
   
             yield return null;  
-        }  
-  
-        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, targetAlpha);  
-  
+        }
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, targetAlpha);
         onComplete?.Invoke(); // 调用完成回调  
     }  
 }

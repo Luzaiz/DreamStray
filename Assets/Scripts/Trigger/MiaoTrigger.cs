@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
+/*弃用*/
 public class MiaoTrigger : MonoBehaviour
 {
     public GameObject miaoCanvas;
@@ -31,8 +32,8 @@ public class MiaoTrigger : MonoBehaviour
                 //dCartComp.m_PositionUnits = positionUnits;
                 //dCartComp.m_Speed = speed;
  
-                switchToCam.VirtualCameraGameObject.SetActive(false); //先禁用再启用，得到切换效果
-                switchToCam.VirtualCameraGameObject.SetActive(true);     
+                //switchToCam.VirtualCameraGameObject.SetActive(false); //先禁用再启用，得到切换效果
+                //switchToCam.VirtualCameraGameObject.SetActive(true);     
                 miaoCanvas.SetActive(true);
                 Invoke("dosomething",2f);
                 playerCtr.inputAllowed = false;
@@ -59,6 +60,6 @@ public class MiaoTrigger : MonoBehaviour
 
     private void dosomething()
     {
-        animobj.GetComponent<Animator>().SetBool("isAnim 0",true);
+        animobj.GetComponent<Animator>().SetBool("isAnim",true);
     }
 }

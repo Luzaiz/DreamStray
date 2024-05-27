@@ -11,17 +11,6 @@ public class NpcMgr : MonoBehaviour
     public string npcName;
     public string[] contentList;
     public CinemachineVirtualCameraBase switchToCam; 
-    public GameObject player;
-
+    public PlayerMgr player;
     public GameObject tipsCanvas;
-
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
 }

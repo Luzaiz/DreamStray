@@ -1,8 +1,9 @@
 using System.Collections;  
 using System.Collections.Generic;  
 using UnityEngine;  
-using UnityEngine.UI; // 确保包含UI命名空间  
-  
+using UnityEngine.UI;
+
+/*第四关迷你地图（暂时废弃）*/
 public class MiniMapController : MonoBehaviour  
 {  
     public Image playerMarker; // 玩家标记的Image组件  

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    public GameObject tipsCanvas;
+    public BasePanel tipsPanel;
 
     private bool isNearDoor = false;
     private bool isOpenDoor = false;
@@ -25,25 +25,38 @@ public class DoorTrigger : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                doorAnim.enabled = true;
+                isNearDoor = false;
                 isOpenDoor = true;
-                tipsCanvas.SetActive(false);
+                doorAnim.enabled = true;
+                UIManager.Instance.ClosePanel(UIConst.DoorTipsPanel);
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag=="Player" && !isOpenDoor)
+        if (!isOpenDoor && other.tag=="Player")
         {
-            tipsCanvas.SetActive(true);
             isNearDoor = true;
+            if (!tipsPanel)
+            {
+                tipsPanel = UIManager.Instance.OpenPanel(UIConst.DoorTipsPanel) as BasePanel;
+                
+            }
+            else
+            {
+                tipsPanel.gameObject.SetActive(true);
+            }
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        tipsCanvas.SetActive(false);
-        isNearDoor = false;
+        if (tipsPanel)
+        {
+            tipsPanel.gameObject.SetActive(false);
+            isNearDoor = false;
+        }
     }
 }

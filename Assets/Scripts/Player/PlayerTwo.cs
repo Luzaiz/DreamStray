@@ -7,8 +7,7 @@ public class PlayerTwo : PlayerMgr
     // Start is called before the first frame update
     void Start()
     {
-        animator = transform.GetComponent<Animator>();
-        controller = transform.GetComponent<CharacterController>();
+        
     }
 
     // Update is called once per frame
@@ -16,7 +15,12 @@ public class PlayerTwo : PlayerMgr
     {
         if (inputAllowed)
         {
-            mymove();
+            mymove(true,false,false);
+        }
+        else
+        {
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", false);
         }
     }
 }
