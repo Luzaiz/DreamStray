@@ -14,6 +14,7 @@ public class UIConst
     public const string ThinkPanel = "ThinkPanel";
     public const string FadePanel = "FadePanel";
     public const string CatchEndPanel = "CatchEndPanel";
+    public const string CatchFalledPanel = "CatchFalledPanel";
 }
 public class UIManager
 {
@@ -70,6 +71,7 @@ public class UIManager
             {UIConst.ThinkPanel,"ThinkPanel"},
             {UIConst.FadePanel,"FadePanel"},
             {UIConst.CatchEndPanel,"CatchEndPanel"},
+            {UIConst.CatchFalledPanel,"CatchFalledPanel"},
         };
     }
 

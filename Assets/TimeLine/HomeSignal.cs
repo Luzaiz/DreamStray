@@ -9,7 +9,9 @@ public class HomeSignal : MonoBehaviour
 {
     public PlayableDirector playableDirector;
     private PlayerMove playerCtr;
-    public CinemachineVirtualCamera switchToCam;
+    public CinemachineVirtualCamera toWindowCam;
+    public CinemachineVirtualCamera toSleepCam;
+    public GameObject fade;
 
     private float timelineDuration;
     void Start()
@@ -27,6 +29,7 @@ public class HomeSignal : MonoBehaviour
     void PlayTimeline()
     {
         playerCtr.inputAllowed = false;
+        playerCtr.animator.SetBool("IsAnim",true);
         /*播放“喵”音乐*/
         StartCoroutine(WaitForTimelineFinish());
     }
@@ -36,11 +39,12 @@ public class HomeSignal : MonoBehaviour
         //StartCoroutine(BlendToCamera(switchToCam, 2.0f));
         timelineDuration = (float)playableDirector.duration;
         playableDirector.Play();
-        switchToCam.Priority = 20;
+        toSleepCam.Priority = 25;
         yield return new WaitForSeconds(timelineDuration);
-        BasePanel fade = UIManager.Instance.OpenPanel(UIConst.FadePanel);
-        fade.gameObject.GetComponentInChildren<FadeInOut>().StartFadeOut();
-        yield return new WaitForSeconds(1f);
+        fade.SetActive(true);
+        fade.GetComponentInChildren<FadeInOut>().StartFadeOut();
+        yield return new WaitForSeconds(2f);
+        playerCtr.animator.SetBool("IsAnim",false);
         SceneManager.LoadScene("Day1");
     }
     //报错
@@ -62,15 +66,5 @@ public class HomeSignal : MonoBehaviour
     void CloseMiaoPanel()
     {
         UIManager.Instance.ClosePanel(UIConst.MiaoPanel);
-    }
-
-    public void PlayThinkPanel()
-    {
-        UIManager.Instance.OpenPanel(UIConst.ThinkPanel);
-        Invoke("CloseThinkPanel", 3f);
-    }
-    void CloseThinkPanel()
-    {
-        UIManager.Instance.ClosePanel(UIConst.ThinkPanel);
     }
 }

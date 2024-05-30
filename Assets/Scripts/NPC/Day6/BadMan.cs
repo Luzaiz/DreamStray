@@ -6,18 +6,20 @@ using UnityEngine;
 public class BadMan : MonoBehaviour
 {
     public float runSpeed;
+    public float currentSpeed;
     private float translation;
-    private Animator animator;
+    [SerializeField]private Animator animator;
     
     public Transform startTrans;
     public CharacterController controller;
     public PlayerSix player;
-    // Start is called before the first frame update
+    
     void Start()
     {
+        currentSpeed = runSpeed;
         controller = transform.GetComponent<CharacterController>();
         // controller.enabled = false;
-        animator = transform.GetComponent<Animator>();
+        animator = transform.Find("Model").GetComponent<Animator>();
         playIdle();
     }
 
@@ -26,12 +28,13 @@ public class BadMan : MonoBehaviour
     {
         if (player.isSaipao)
         {
+            currentSpeed = runSpeed;
             //GameObject trigger = GameObject.Find("SaiPaoTrigger");
             //trigger.GetComponent<BoxCollider>().enabled = false;
             playRun();
             //translation = runSpeed * Time.deltaTime;
             //transform.Translate(0, 0, translation); // 在Z方向上平移
-            controller.Move(-Vector3.forward * runSpeed * Time.deltaTime);
+            controller.Move(-Vector3.forward * currentSpeed * Time.deltaTime);
         }
     }
 
@@ -43,5 +46,11 @@ public class BadMan : MonoBehaviour
     public void playRun()
     {
         animator.SetBool("isRun", true);
+    }
+
+    public void SetPos()
+    {
+        transform.position = startTrans.position;
+        transform.rotation = startTrans.rotation;
     }
 }

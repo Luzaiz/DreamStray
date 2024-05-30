@@ -19,4 +19,15 @@ public class StartPanel : BasePanel
         SettingPanel panel = UIManager.Instance.OpenPanel(UIConst.SettingPanel) as SettingPanel;
         panel.UpdatePannelInfo();
     }
+    public void onQuitBtnClick()  
+    {  
+        #if UNITY_EDITOR  
+        if (UnityEditor.EditorApplication.isPlaying)  
+        {  
+            UnityEditor.EditorApplication.isPlaying = false;  
+        }  
+        #else  
+        Application.Quit();  
+        #endif  
+    }  
 }

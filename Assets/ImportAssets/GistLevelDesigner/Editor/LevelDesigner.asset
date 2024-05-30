@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4720966e36f36e54f993c5189140844b, type: 3}
+  m_Name: LevelDesigner
+  m_EditorClassIdentifier: 
+  managed:
+  - identity: 2
+    instanceID: 0
+    GUID: 3cef2f915d435564082fb0c1696d3765
+    fileID: 5994139911943994682
+    rootGUID: b6c20a7b777c8c8489da121259db8e02
+  - identity: 2
+    instanceID: 0
+    GUID: 14fba8b2c98502f4bb1d4f0386206eb0
+    fileID: 559682800393620245
+    rootGUID: 0411967448e676f438012bc1ec6b933d
+  - identity: 2
+    instanceID: 0
+    GUID: eda0c0233b612b14abc4a825eb24d70d
+    fileID: 7285985740243686744
+    rootGUID: e6b36899135f2524f90c4dd87e40bb67
+  - identity: 2
+    instanceID: 0
+    GUID: 891bab8ac48a24845a97aa8ce4c9b3da
+    fileID: 984758710
+    rootGUID: edd8897f642bd164da1c8628bca21694

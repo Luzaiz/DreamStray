@@ -18,19 +18,19 @@ using UnityEngine;
         
     }
     public void onBackBtnClick()  
-    {  
-        Debug.Log("backBtn clicked!");  
+    { 
         ClosePanel();
         Time.timeScale = 1f;
     }  
     public void onNewGameBtnClick()  
-    {  
-        Debug.Log("newGameBtn clicked!");  
+    {
+        Time.timeScale = 1f;
+        UIManager.Instance.ClosePanel(UIConst.PausePanel);
         SceneManager.LoadScene("Start");
     }  
     public void onSettingBtnClick()  
-    {  
-        Debug.Log("settingBtn clicked!");
-        UIManager.Instance.OpenPanel(UIConst.SettingPanel);
+    {
+        SettingPanel panel = UIManager.Instance.OpenPanel(UIConst.SettingPanel) as SettingPanel;
+        panel.UpdatePannelInfo();
     }  
 }

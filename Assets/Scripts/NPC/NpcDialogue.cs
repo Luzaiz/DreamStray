@@ -7,10 +7,10 @@ public class NpcDialogue : NpcMgr
 {
     public NpcPoint pointUI;
     public Transform lookatTarget;
-    public GameObject NextTrigger;
+    public GameObject NextLevelTrigger;
     
-    [SerializeField]private Transform NpcTrans;
-    [SerializeField]private bool isNearNPC = false;
+    public Transform NpcTrans;
+    public bool isNearNPC = false;
     [SerializeField]private bool isRotateEnd = false;
     [SerializeField]private bool isStartDialog = false;
     public float angleSpeed = 0.02f;

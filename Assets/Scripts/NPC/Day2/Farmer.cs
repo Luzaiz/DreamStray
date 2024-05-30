@@ -5,6 +5,7 @@ using UnityEngine;
 public class Farmer : MonoBehaviour
 {
     public bool isStartGame=false;
+    public GameObject day2Panel;
     private GameObject diaTrigger;
     private bool hasExecuted = false;
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class Farmer : MonoBehaviour
         if (!hasExecuted &&　!diaTrigger.activeSelf)
         {
             isStartGame = true;
+            day2Panel.GetComponent<Day2Panel>().countLabel.gameObject.SetActive(true);
             hasExecuted = true;
         }
     }

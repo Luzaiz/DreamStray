@@ -114,7 +114,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6709\u732B ! ! "
+  m_text: "\u201C \u55B5 \u201D~~ "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b86075c66f640d542ae993290bff2c48, type: 2}
   m_sharedMaterial: {fileID: 1380797363359742826, guid: b86075c66f640d542ae993290bff2c48, type: 2}

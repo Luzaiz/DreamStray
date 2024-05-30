@@ -16,9 +16,9 @@ public class PlayerMgr : MonoBehaviour
     
     //重力相关  
     public float gravity = -40f;
-    private Vector3 velocity = Vector3.zero;
+    [SerializeField]private Vector3 velocity = Vector3.zero;
     [SerializeField]private Transform groundCheck;
-    private float checkRadious = 0.2f;
+    private float checkRadious = 0.05f; //太大会有滞后效果
     [SerializeField]private bool isGround;
     public LayerMask layerMask;
     

@@ -7,9 +7,9 @@ public class Day1Dialogue : NpcDialogue
 {
     public override void AfterEndDialog() 
     {
-        if (NextTrigger)
+        if (NextLevelTrigger)
         {
-            NextTrigger.SetActive(true);
+            NextLevelTrigger.SetActive(true);
             player.canNext = true;
         }
         base.AfterEndDialog();

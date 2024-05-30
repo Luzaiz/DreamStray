@@ -8,6 +8,8 @@ TagManager:
   - Interactable
   - BadMan
   - Mouse
+  - MoveGround
+  - DisappearGround
   layers:
   - Default
   - TransparentFX

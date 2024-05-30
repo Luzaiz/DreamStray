@@ -45,9 +45,4 @@ public class CatchEndPanel : BasePanel
         base.ClosePanel();
     }
 
-    public void PlayAnim()
-    {
-        StartCoroutine(ShowPanel(panel));
-    }
-    
 }

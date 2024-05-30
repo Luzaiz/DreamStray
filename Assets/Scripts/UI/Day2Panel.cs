@@ -17,6 +17,7 @@ public class Day2Panel : BasePanel
     void Start()
     {
         player = GameObject.Find("DreamCat").gameObject;
+        countLabel.gameObject.SetActive(false);
         countLabel.text = nowCount.ToString();
     }
 
@@ -27,9 +28,8 @@ public class Day2Panel : BasePanel
         {
             hasExecuted = true;
             farmer.isStartGame = false;
-            //CatchEndPanel catchEndPanel = 
             UIManager.Instance.OpenPanel(UIConst.CatchEndPanel);
-            //catchEndPanel.PlayAnim();
+            countLabel.gameObject.SetActive(false);
             dia2Trigger.SetActive(true);
         }
     }
@@ -42,10 +42,7 @@ public class Day2Panel : BasePanel
     
     public void onPauseBtnClick()  
     {  
-        Debug.Log("PauseBtn clicked!");
-        //Day2Panel day2Panel = new Day2Panel();
-        //UIManager.Instance.OpenPanel(UIConst.PausePanel);
-        //player.GetComponent<PlayerTwo>().inputAllowed = false;
         Time.timeScale = 0f;
+        UIManager.Instance.OpenPanel(UIConst.PausePanel);
     }  
 }

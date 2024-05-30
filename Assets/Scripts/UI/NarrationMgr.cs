@@ -6,34 +6,51 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Cinemachine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class NarrationMgr : MonoBehaviour
 {
     public TextMeshProUGUI storyText; // 剧情文本  
     public List<string> storyList = new List<string>(); // 剧情文本列表  
     private int currentLineIndex = 0; // 当前显示的文本索引  
+    public float waitTime = 3f;
+    
+    //可选属性
     [SerializeField]private GameObject player;
     public GameObject npc;
     private NpcPoint npcTip;
-    
     public PlayableDirector playableDirector;
     public CinemachineVirtualCameraBase freeCamera;
+    public bool isend = false;
 
     void Start()  
-    {  
-        player = GameObject.Find("DreamCat");
+    {
+        if (player)
+        {
+            player = GameObject.Find("DreamCat");
+            player.GetComponent<PlayerMgr>().inputAllowed = false;
+        }
         if (npc)
         {
             npcTip = npc.GetComponentInChildren<NpcPoint>();
             npcTip.Hide();
         }
-        player.GetComponent<PlayerMgr>().inputAllowed = false;
-        freeCamera.Priority = 5;
-        UpdateStoryText(); 
-        playableDirector.Play();
+        if(freeCamera) freeCamera.Priority = 5;
+        UpdateStoryText();
+        if (playableDirector) playableDirector.Play();
         StartCoroutine(PlayStoryAutomatically());  // 自动播放剧情 
     }  
-      
+    IEnumerator PlayStoryAutomatically() 
+    { 
+        while (currentLineIndex < storyList.Count) 
+        { 
+            UpdateStoryText(); 
+            yield return new WaitForSeconds(waitTime); 
+            ShowNextStoryLine();
+        }  
+        CloseInterface();  
+    }
+    
     // 显示下一句剧情文本  
     public void ShowNextStoryLine()  
     {  
@@ -44,7 +61,11 @@ public class NarrationMgr : MonoBehaviour
         }  
         else  
         {  
-            CloseInterface();  
+            CloseInterface();
+            if (isend)
+            {
+                SceneManager.LoadScene("Start");
+            }
         }  
     }  
       
@@ -71,8 +92,8 @@ public class NarrationMgr : MonoBehaviour
     {
         gameObject.SetActive(false);
         if(npc) npcTip.Show();
-        player.GetComponent<PlayerMgr>().inputAllowed = true;
-        freeCamera.Priority = 20;
+        if(player) player.GetComponent<PlayerMgr>().inputAllowed = true;
+        if(freeCamera) freeCamera.Priority = 20;
         //Invoke("dosomething",2f);
     }
     /*void dosomething()
@@ -82,14 +103,5 @@ public class NarrationMgr : MonoBehaviour
         freeCamera.Priority = 20;
     }*/
     
-    IEnumerator PlayStoryAutomatically()  
-    {  
-        while (currentLineIndex < storyList.Count)  
-        {  
-            UpdateStoryText();  
-            yield return new WaitForSeconds(3f); 
-            ShowNextStoryLine();  
-        }  
-        CloseInterface();  
-    }
+    
 }

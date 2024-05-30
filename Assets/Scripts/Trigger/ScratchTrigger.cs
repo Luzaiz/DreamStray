@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ScratchTrigger : MonoBehaviour
 {
-    public BasePanel tipsPanel;
+    public GameObject tipsPanel;
     private bool isNear = false;
     [SerializeField]private Animator scratchAnim;
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class ScratchTrigger : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 isNear = false;
-                UIManager.Instance.ClosePanel(UIConst.ScratchTipsPanel);
+                tipsPanel.gameObject.SetActive(false);
                 scratchAnim.SetTrigger("Scratch");
             }
         }
@@ -33,15 +33,7 @@ public class ScratchTrigger : MonoBehaviour
         if (other.tag=="Player")
         {
             isNear = true;
-            if (!tipsPanel)
-            {
-                tipsPanel = UIManager.Instance.OpenPanel(UIConst.ScratchTipsPanel) as BasePanel;
-                
-            }
-            else
-            {
-                tipsPanel.gameObject.SetActive(true);
-            }
+            tipsPanel.gameObject.SetActive(true);
         }
         
     }
@@ -50,8 +42,8 @@ public class ScratchTrigger : MonoBehaviour
     {
         if (tipsPanel)
         {
-            tipsPanel.gameObject.SetActive(false);
             isNear = false;
+            tipsPanel.gameObject.SetActive(false);
         }
     }
 }

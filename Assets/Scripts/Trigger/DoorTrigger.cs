@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    public BasePanel tipsPanel;
+    public GameObject tipsPanel;
 
     private bool isNearDoor = false;
     private bool isOpenDoor = false;
@@ -28,7 +28,7 @@ public class DoorTrigger : MonoBehaviour
                 isNearDoor = false;
                 isOpenDoor = true;
                 doorAnim.enabled = true;
-                UIManager.Instance.ClosePanel(UIConst.DoorTipsPanel);
+                tipsPanel.gameObject.SetActive(false);
             }
         }
     }
@@ -38,15 +38,7 @@ public class DoorTrigger : MonoBehaviour
         if (!isOpenDoor && other.tag=="Player")
         {
             isNearDoor = true;
-            if (!tipsPanel)
-            {
-                tipsPanel = UIManager.Instance.OpenPanel(UIConst.DoorTipsPanel) as BasePanel;
-                
-            }
-            else
-            {
-                tipsPanel.gameObject.SetActive(true);
-            }
+            tipsPanel.gameObject.SetActive(true);
         }
         
     }

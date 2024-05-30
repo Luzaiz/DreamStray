@@ -9,12 +9,18 @@ using DG.Tweening;
 public class ChangeSceneTrigger : MonoBehaviour
 {
     public string nextSceneName;
+    public GameObject fade;
 
     private void Start()
     {
         if (nextSceneName == string.Empty)
         {
             Debug.LogError("没有配置下个场景的名字");
+        }
+
+        if (!fade)
+        {
+            Debug.LogError("没有配置fadepanel");
         }
     }
 
@@ -32,9 +38,9 @@ public class ChangeSceneTrigger : MonoBehaviour
 
     IEnumerator ToNextDay(string nextSceneName)
     {
-        BasePanel fade = UIManager.Instance.OpenPanel(UIConst.FadePanel);
-        fade.gameObject.GetComponentInChildren<FadeInOut>().StartFadeOut();
-        yield return new WaitForSeconds(1.5f);
+        fade.SetActive(true);
+        fade.GetComponentInChildren<FadeInOut>().StartFadeOut();
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(nextSceneName);
     }
 }
